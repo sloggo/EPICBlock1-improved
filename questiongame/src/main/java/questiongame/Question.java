@@ -29,5 +29,13 @@ public class Question {
             System.out.println("");
     }
 
+    public Boolean isCorrect(String ans){
+        if(ans.equals(answer)){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
 }
 

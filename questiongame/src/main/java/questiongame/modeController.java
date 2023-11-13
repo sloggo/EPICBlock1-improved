@@ -67,7 +67,7 @@ public class modeController {
             q.printQuestion();
             String ansString = scanner.nextLine();
 
-            if(ansString.equals(q.answer)){
+            if(q.isCorrect(ansString)){
                 System.out.println("Correct!\n");
                 correct++;
             } else{
@@ -94,7 +94,7 @@ public class modeController {
             randomQ.printQuestion();
             String ansString = scanner.nextLine();
 
-            if(ansString.equals(randomQ.answer)){
+            if(randomQ.isCorrect(ansString)){
                 System.out.println("Correct!\n");
                 correct++;
             } else{
@@ -125,7 +125,7 @@ public class modeController {
             randomQ.printQuestion();
             String ansString = scanner.nextLine();
 
-            if(ansString.equals(randomQ.answer)){
+            if(randomQ.isCorrect(ansString)){
                 System.out.println("Correct!\n");
                 round++;
             } else{
