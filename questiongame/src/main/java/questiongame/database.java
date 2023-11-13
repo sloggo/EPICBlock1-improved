@@ -75,7 +75,7 @@ public class database {
             if (doc != null) {
                 if(BCrypt.checkpw(pass, doc.get("password").toString())){
                     System.out.println("Logged in!");
-                    User newUserObj = new User(doc.get("_id").toString(), doc.get("username").toString(), doc.get("password").toString(), Integer.parseInt(doc.get("score").toString()));
+                    User newUserObj = new User(doc);
                     return newUserObj;
                 } else{
                     System.out.println("User not found or incorrect credentials.");
