@@ -12,11 +12,11 @@ public class User {
     public User(String userId, String username, String password, int score){
         this.userId = userId;
         this.username = username;
-        this.password = hashPass(password, "securetoken");
+        this.password = password;
         this.score = score;
     }
 
-    public String hashPass(String passwordInput, String pepper){
+    public static String hashPass(String passwordInput, String pepper){
         return BCrypt.hashpw(passwordInput, BCrypt.gensalt()+pepper);
     }
 }

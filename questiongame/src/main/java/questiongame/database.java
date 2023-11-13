@@ -7,6 +7,8 @@ import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
+import org.mindrot.jbcrypt.BCrypt;
+
 //importing mongo extensions
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -44,7 +46,7 @@ public class database {
                 Document newUser = new Document()
                         .append("userId", newUserId)
                         .append("username", usernameToCreate)
-                        .append("password", passwordToCreate)
+                        .append("password", User.hashPass(passwordToCreate, "securetoken"))
                         .append("score", score);
                 usersCollection.insertOne(newUser);
                 User newUserObj = new User(newUserId.toString(), usernameToCreate, passwordToCreate, score);
@@ -65,18 +67,20 @@ public class database {
         MongoCollection<Document> usersCollection = mongoDB.getCollection("users");
 
         // Create separate filters for "username" and "password"
-        Bson usernameFilter = Filters.eq("username", user);
-        Bson passwordFilter = Filters.eq("password", pass);
+        Bson filter = Filters.eq("username", user);
 
-        // Combine the filters using the Filters.and method
-        Bson filter = Filters.and(usernameFilter, passwordFilter);
         String userId = "";
         try {
             Document doc = usersCollection.find(filter).first();
             if (doc != null) {
-                System.out.println("Logged in!");
-                User newUserObj = new User(doc.get("_id").toString(), doc.get("username").toString(), doc.get("password").toString(), Integer.parseInt(doc.get("score").toString()));
-                return newUserObj;
+                if(BCrypt.checkpw(pass, doc.get("password").toString())){
+                    System.out.println("Logged in!");
+                    User newUserObj = new User(doc.get("_id").toString(), doc.get("username").toString(), doc.get("password").toString(), Integer.parseInt(doc.get("score").toString()));
+                    return newUserObj;
+                } else{
+                    System.out.println("User not found or incorrect credentials.");
+                    return null;
+                }
             } else {
                 System.out.println("User not found or incorrect credentials.");
                 return null;
