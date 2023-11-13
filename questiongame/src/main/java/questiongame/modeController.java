@@ -32,17 +32,6 @@ public class modeController {
             return sortedQuestions;
     }
 
-    public static void printQuestion(Question question){
-        System.out.println("------------------------------------------------------");
-        System.out.println(question.question);
-        System.out.println("");
-
-            for(String ans: question.options){
-                int index = Arrays.asList(question.options).indexOf(ans);
-                System.out.println((index+1)+ ": "+ans+"\t");
-            }
-            System.out.println("");
-    }
 
     public static void difficultyMode(Question[] questions, User user){
         System.out.print("\033[H\033[2J");
@@ -75,7 +64,7 @@ public class modeController {
         System.out.println(sortedQ.toString());
 
         for(Question q : sortedQ){ // loop through selected questions
-            printQuestion(q);
+            q.printQuestion();
             String ansString = scanner.nextLine();
 
             if(ansString.equals(q.answer)){
@@ -102,7 +91,7 @@ public class modeController {
             int randomIndex = random.nextInt(questionLength);
             Question randomQ = questions[randomIndex];
 
-            printQuestion(randomQ);
+            randomQ.printQuestion();
             String ansString = scanner.nextLine();
 
             if(ansString.equals(randomQ.answer)){
@@ -133,7 +122,7 @@ public class modeController {
             int randomIndex = random.nextInt(questionLength);
             Question randomQ = questions[randomIndex];
 
-            printQuestion(randomQ);
+            randomQ.printQuestion();
             String ansString = scanner.nextLine();
 
             if(ansString.equals(randomQ.answer)){

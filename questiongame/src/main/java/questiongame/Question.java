@@ -17,5 +17,17 @@ public class Question {
         this.options = options;
     }
 
+    public void printQuestion(){
+        System.out.println("------------------------------------------------------");
+        System.out.println(question);
+        System.out.println("");
+
+            for(String ans: options){
+                int index = Arrays.asList(options).indexOf(ans);
+                System.out.println((index+1)+ ": "+ans+"\t");
+            }
+            System.out.println("");
+    }
+
 }
 
