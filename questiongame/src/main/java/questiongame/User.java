@@ -27,4 +27,14 @@ public class User {
     public static String hashPass(String passwordInput, String pepper){
         return BCrypt.hashpw(passwordInput, BCrypt.gensalt()+pepper);
     }
+
+    public Document convertToMongo(){
+        Document newUser = new Document() // convert updated user back into a document to insert into mongodb again
+                        .append("userId", new ObjectId(userId))
+                        .append("username", username)
+                        .append("password", password)
+                        .append("score", score);
+
+        return newUser;
+    }
 }

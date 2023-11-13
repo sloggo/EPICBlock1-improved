@@ -111,11 +111,7 @@ public class database {
 
         Bson usernameFilter = Filters.eq("username", user.username);
 
-        Document newUser = new Document() // convert updated user back into a document to insert into mongodb again
-                        .append("userId", new ObjectId(user.userId))
-                        .append("username", user.username)
-                        .append("password", user.password)
-                        .append("score", user.score);
+        Document newUser = user.convertToMongo();
 
         ReplaceOptions opts = new ReplaceOptions().upsert(true);
         usersCollection.replaceOne(usernameFilter, newUser, opts);
