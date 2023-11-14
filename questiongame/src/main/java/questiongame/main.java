@@ -10,8 +10,7 @@ public class main {
     
     public static void main(String[] args){
 
-        Question[] Questions = {
-        };
+        Question[] Questions = database.getAllQuestions();
         //login/signup prompt loop
         boolean loggedIn = false;
 

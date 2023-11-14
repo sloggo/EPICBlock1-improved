@@ -2,6 +2,7 @@ package questiongame;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
@@ -115,5 +116,23 @@ public class database {
 
         ReplaceOptions opts = new ReplaceOptions().upsert(true);
         usersCollection.replaceOne(usernameFilter, newUser, opts);
+    }
+
+    public static Question[] getAllQuestions(){
+        database dBController = new database();
+        MongoDatabase mongoDB = dBController.mongoClient.getDatabase("questionGame");
+        MongoCollection<Document> questionCollection = mongoDB.getCollection("questions");
+
+        FindIterable<Document> documents = questionCollection.find();
+        Question[] Questions = {};
+
+        for(Document q : documents){
+            Question question = new Question(q);
+            int length = Questions.length;
+            Questions = Arrays.copyOf(Questions, length+1);
+            Questions[length] = question;
+        }
+
+        return Questions;
     }
 }
