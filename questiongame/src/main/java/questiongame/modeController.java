@@ -86,10 +86,7 @@ public class modeController {
         int correct = 0;
 
         for(int i = 0; i<6; i++){
-            int questionLength = questions.length;
-            Random random = new Random();
-            int randomIndex = random.nextInt(questionLength);
-            Question randomQ = questions[randomIndex];
+            Question randomQ = fetchRandomQuestion(questions);
 
             randomQ.printQuestion();
             String ansString = scanner.nextLine();
@@ -117,10 +114,7 @@ public class modeController {
         int round = 1;
 
         while(alive == true){
-            int questionLength = questions.length;
-            Random random = new Random();
-            int randomIndex = random.nextInt(questionLength);
-            Question randomQ = questions[randomIndex];
+            Question randomQ = fetchRandomQuestion(questions);
 
             randomQ.printQuestion();
             String ansString = scanner.nextLine();
@@ -139,6 +133,15 @@ public class modeController {
     public static void finishedQuiz(User user, int increaseScore){
         score.updateScore(user, increaseScore);
         leaderboard.generateLeaderboard(increaseScore);
+    }
+
+    public static Question fetchRandomQuestion(Question[] questions){
+        int questionLength = questions.length;
+        Random random = new Random();
+        int randomIndex = random.nextInt(questionLength);
+        Question randomQ = questions[randomIndex];
+
+        return randomQ;
     }
 
 }

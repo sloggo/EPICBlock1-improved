@@ -1,6 +1,10 @@
 package questiongame;
 
 import java.util.Arrays;
+import java.util.List;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 public class Question {
     topic topic;
@@ -15,6 +19,15 @@ public class Question {
         this.question = question;
         this.answer = answer;
         this.options = options;
+    }
+
+    public Question(Document mongoDocument){
+        this.topic = topic.valueOf(mongoDocument.getString("topic"));
+        this.difficulty = difficulty.valueOf(mongoDocument.getString("difficulty"));
+        this.question = mongoDocument.getString("question");
+        this.answer = mongoDocument.getString("answer");
+        List<String> optionsList = mongoDocument.getList("options", String.class);
+        this.options = optionsList.toArray(new String[0]);
     }
 
     public void printQuestion(){
@@ -37,5 +50,15 @@ public class Question {
         }
     }
 
+    public Document toMongo(){
+        Document doc = new Document() // convert updated user back into a document to insert into mongodb again
+                        .append("topic", topic)
+                        .append("difficulty", difficulty)
+                        .append("question", question)
+                        .append("answer", answer)
+                        .append("options", options);
+
+        return doc;
+    }
 }
 
