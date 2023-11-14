@@ -1,7 +1,12 @@
 package questiongame;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
+
+import org.bson.types.ObjectId;
+
 import java.util.Random;
 
 public class modeController {
@@ -84,9 +89,17 @@ public class modeController {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Random Mode!");
         int correct = 0;
+        Collection<ObjectId> selectedQ = new ArrayList<>(); // list of ids to keep track
 
         for(int i = 0; i<6; i++){
-            Question randomQ = fetchRandomQuestion(questions);
+            if(selectedQ.size() == questions.length){
+                break;
+            }
+            Question randomQ = null;
+
+            while(randomQ != null && selectedQ.contains(randomQ.objectId)){
+                randomQ = fetchRandomQuestion(questions);
+            }
 
             randomQ.printQuestion();
             String ansString = scanner.nextLine();
@@ -113,8 +126,20 @@ public class modeController {
         boolean alive = true;
         int round = 1;
 
+        Collection<ObjectId> selectedQ = new ArrayList<>(); // list of ids to keep track
+
+
         while(alive == true){
-            Question randomQ = fetchRandomQuestion(questions);
+
+            if(selectedQ.size() == questions.length){
+                System.out.println("You answered all the questions correctly!");
+                break;
+            }
+            Question randomQ = null;
+
+            while(randomQ != null && selectedQ.contains(randomQ.objectId)){
+                randomQ = fetchRandomQuestion(questions);
+            }
 
             randomQ.printQuestion();
             String ansString = scanner.nextLine();

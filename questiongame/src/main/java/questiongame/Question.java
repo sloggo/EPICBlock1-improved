@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 public class Question {
+    ObjectId objectId;
     topic topic;
     difficulty difficulty;
     String question;
@@ -14,6 +15,7 @@ public class Question {
     String[] options;
 
     public Question(topic topic, difficulty difficulty, String question, String answer, String[] options){
+        this.objectId = new ObjectId();
         this.topic = topic;
         this.difficulty = difficulty;
         this.question = question;
@@ -22,6 +24,7 @@ public class Question {
     }
 
     public Question(Document mongoDocument){
+        this.objectId = mongoDocument.getObjectId("_id");
         this.topic = questiongame.topic.valueOf(mongoDocument.getString("topic"));
         this.difficulty = questiongame.difficulty.valueOf(mongoDocument.getString("difficulty"));
         this.question = mongoDocument.getString("question");
