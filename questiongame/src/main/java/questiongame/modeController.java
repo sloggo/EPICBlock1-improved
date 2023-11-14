@@ -97,7 +97,7 @@ public class modeController {
             }
             Question randomQ = null;
 
-            while(randomQ != null && selectedQ.contains(randomQ.objectId)){
+            while(randomQ == null || selectedQ.contains(randomQ.objectId)){
                 randomQ = fetchRandomQuestion(questions);
             }
 
