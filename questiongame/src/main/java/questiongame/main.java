@@ -11,22 +11,6 @@ public class main {
     public static void main(String[] args){
 
         Question[] Questions = {
-            //Discrete Maths questions 74
-            //Novice
-            new Question(questiongame.topic.DISCMATHS, questiongame.difficulty.NOVICE, "Let A = {1,2,3} and B = {3,4,5}. Find A u B", "1", new String[]{"{1,2,3,4,5}", "{1,2}", "{4,5}", "{3}"}),
-            new Question(questiongame.topic.DISCMATHS, questiongame.difficulty.NOVICE, "Determine the truth value of the statement: (P ^ Q) v (¬P ^ Q) when P = True and Q =False", "2", new String[]{"True", "False",}),
-            //Intermediate
-            new Question(questiongame.topic.DISCMATHS, questiongame.difficulty.INTERMEDIATE, "- Find the truth value of the statement: (P ^ Q) v (¬P ^ R) when P = True, Q = False, and R = True", "2", new String[]{"True", "False"}),
-            new Question(questiongame.topic.DISCMATHS, questiongame.difficulty.INTERMEDIATE, "Find the walks of length two from a to a in the following matrix :\n a b c \n ---\n a | 1 0 1 \n b | 0 1 0 \n c | 1 0 1", "1", new String[]{"2", "0", "1", "4"}),
-            //Expert
-            new Question(questiongame.topic.DISCMATHS, questiongame.difficulty.EXPERT, "-\tOn the fabled Island of Knights and Knaves, we meet three people, A, B, and C, one of whom is a knight, one a knave, and one a spy. The knight always tells the truth, the knave always lies, and the spy can either lie or tell the truth.\r\n" + //
-                    "A says: \"C is a knave.\"\r\n" + //
-                    "B says: \"A is a knight.\"\r\n" + //
-                    "C says: \"I am the spy.\"\r\n" + //
-                    "Who is the knight, who is the knave, and who is the spy?\r\n" + //
-                    "", "4", new String[]{"A: Knight, B:Knave, C:Spy", "A:Spy, B:Knight, C:Knave", "A:Knave, B:Spy, C:Knight", "A:Knight, B:Spy, C:Knave"}),
-            //need to insert matrix image in question on next line
-            new Question(questiongame.topic.DISCMATHS, questiongame.difficulty.EXPERT, "Find B when [ 3, 7 * B = [ 2, 8\n \t9, 3 ] \t\t 7, 6 ]", "2", new String[]{"[5/3, -5/27 \n 11/6, -1]", "[35/27, 14/27\n -1/9, 3/2]", "[-3/5, -27/5 \n 6/11 1]", "[-5/3, 5/27 \n -11/6, -1]"}),
             //Computer Science
             //Novice
             new Question(questiongame.topic.COMPSCIFOUND, questiongame.difficulty.NOVICE, "-\tWhich option best desribes Backus Naur Form", "2", new String[]{"Binary code written in a human readable form", "Defines the grammar for a programming language", "Defines the semantics of a program", "The infima of a lattice"}),

@@ -22,8 +22,8 @@ public class Question {
     }
 
     public Question(Document mongoDocument){
-        this.topic = topic.valueOf(mongoDocument.getString("topic"));
-        this.difficulty = difficulty.valueOf(mongoDocument.getString("difficulty"));
+        this.topic = questiongame.topic.valueOf(mongoDocument.getString("topic"));
+        this.difficulty = questiongame.difficulty.valueOf(mongoDocument.getString("difficulty"));
         this.question = mongoDocument.getString("question");
         this.answer = mongoDocument.getString("answer");
         List<String> optionsList = mongoDocument.getList("options", String.class);
