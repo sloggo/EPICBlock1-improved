@@ -10,8 +10,12 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 //method that manages leaderboard 
 public class leaderboard {
-    public static void generateLeaderboard(int userScore){
-        List<Document> userArray = database.getAllUsers();
+    private List<Document> userArray;
+    public leaderboard(){
+        this.userArray = database.getAllUsers();
+    }
+
+    public void generateLeaderboard(int userScore){
 
         // Convert the list to an array
         System.out.print("\033[H\033[2J");

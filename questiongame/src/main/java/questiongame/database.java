@@ -135,4 +135,14 @@ public class database {
 
         return Questions;
     }
+
+    public static void uploadQuestion(Question question){
+        database dBController = new database();
+        MongoDatabase mongoDB = dBController.mongoClient.getDatabase("questionGame");
+        MongoCollection<Document> questionCollection = mongoDB.getCollection("questions");
+
+        Document docQ = question.toMongo();
+
+        questionCollection.insertOne(docQ);
+    }
 }

@@ -10,8 +10,15 @@ import org.bson.types.ObjectId;
 import java.util.Random;
 
 public class modeController {
+    private Question[] questions;
+    private User user;
+
+    public modeController(Question[] questions, User user){
+        this.questions = questions;
+        this.user = user;
+    }
 //method for sorting through questions
-    public static Question[] fetchSpecificQuestions(topic topic, difficulty difficulty, Question[] questions){
+    public Question[] fetchSpecificQuestions(topic topic, difficulty difficulty){
         //create questions array
             Question[] sortedQuestions = {};
             for(int i=0; i<questions.length; i++){
@@ -38,7 +45,7 @@ public class modeController {
     }
 
 
-    public static void difficultyMode(Question[] questions, User user){
+    public void difficultyMode(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
         int correct = 0;
@@ -62,7 +69,7 @@ public class modeController {
                 difficultySelection = questiongame.difficulty.EXPERT;
         }
 
-        Question[] sortedQ = fetchSpecificQuestions(null, difficultySelection, questions);
+        Question[] sortedQ = fetchSpecificQuestions(null, difficultySelection);
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
@@ -80,10 +87,10 @@ public class modeController {
             }
         }
 
-        finishedQuiz(user, correct);
+        finishedQuiz(correct);
     }
 
-    public static void randomMode(Question[] questions, User user){
+    public void randomMode(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
         Scanner scanner = new Scanner(System.in);
@@ -114,10 +121,10 @@ public class modeController {
 
             System.out.print("\033[H\033[2J");
             System.out.flush();
-            finishedQuiz(user, correct);
+            finishedQuiz(correct);
     }
 //sudden death method
-    public static void suddenDeath(Question[] questions, User user){
+    public void suddenDeath(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
         Scanner scanner = new Scanner(System.in);
@@ -152,12 +159,14 @@ public class modeController {
                 alive = false;
             }
         }
-        finishedQuiz(user, round);
+        finishedQuiz(round);
     }
 //when quiz finished, leaderboard is generated
-    public static void finishedQuiz(User user, int increaseScore){
+    public void finishedQuiz(int increaseScore){
         score.updateScore(user, increaseScore);
-        leaderboard.generateLeaderboard(increaseScore);
+
+        leaderboard lb = new leaderboard();
+        lb.generateLeaderboard(increaseScore);
     }
 
     public static Question fetchRandomQuestion(Question[] questions){
