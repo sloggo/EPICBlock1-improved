@@ -126,7 +126,7 @@ public class database {
         FindIterable<Document> documents = questionCollection.find();
         Question[] Questions = {};
 
-        for(Document q : documents){
+        for(Document q : documents){ // loop through all collected documents to convert to questions class
             Question question = new Question(q);
             int length = Questions.length;
             Questions = Arrays.copyOf(Questions, length+1);
@@ -141,8 +141,8 @@ public class database {
         MongoDatabase mongoDB = dBController.mongoClient.getDatabase("questionGame");
         MongoCollection<Document> questionCollection = mongoDB.getCollection("questions");
 
-        Document docQ = question.toMongo();
+        Document docQ = question.toMongo(); // returns mongo doc
 
-        questionCollection.insertOne(docQ);
+        questionCollection.insertOne(docQ); // adds to collection
     }
 }

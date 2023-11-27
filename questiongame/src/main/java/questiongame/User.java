@@ -21,7 +21,7 @@ public class User {
         this.score = score;
 
 
-        if(userId == "65525e039384ca1a0ddfd54a"){
+        if(userId == "65525e039384ca1a0ddfd54a"){ // if the user is an admin
             this.isAdmin = true;
         } else{
             this.isAdmin = false;
@@ -29,7 +29,7 @@ public class User {
         
     }
 
-    public User(Document doc){
+    public User(Document doc){ // convert mongoDB document to user
         this.userId = doc.get("_id").toString();
         this.username = doc.get("username").toString();
         this.password =  doc.get("password").toString();
@@ -42,7 +42,7 @@ public class User {
         }
     }
 
-    public static String hashPass(String passwordInput, String pepper){
+    public static String hashPass(String passwordInput, String pepper){ // returns hashed password
         return BCrypt.hashpw(passwordInput, BCrypt.gensalt()+pepper);
     }
 
@@ -68,10 +68,10 @@ public class User {
         int input = scanner.nextInt();
 
         switch(input){
-            case(1):
+            case(1): // option 1 - add question
                 addQuestion();
                 break;
-            case(2):
+            case(2): // option 2 - back to menu
                 commandLineMenu.gameModeMenu(database.getAllQuestions(), this);
         }
     }
@@ -91,7 +91,7 @@ public class User {
 
         String[] answers = {};
 
-        for(int i = 0; i<amountAns; i++){
+        for(int i = 0; i<amountAns; i++){ // take in x amount of possible answers for multiple choice
             System.out.println("Enter answer "+(i+1)+":");
             String ans = scanner.nextLine();
 
@@ -121,7 +121,7 @@ public class User {
         }
         System.out.println();
 
-        System.out.println("What topic? 1- Novice, 2- Intermediate, 3- Expert");
+        System.out.println("What difficulty? 1- Novice, 2- Intermediate, 3- Expert");
         int opt2 = scanner.nextInt();
         difficulty difficulty = null;
         switch(opt2){
@@ -135,8 +135,8 @@ public class User {
         System.out.println();
 
 
-        Question newQ = new Question(topic, difficulty, question, ans, answers);
-        database.uploadQuestion(newQ);
+        Question newQ = new Question(topic, difficulty, question, ans, answers); // make new question class
+        database.uploadQuestion(newQ); // upload to database
 
         this.settings();
     }
